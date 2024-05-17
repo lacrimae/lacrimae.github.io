@@ -2,7 +2,7 @@
   lacrimae.github.io - v1
 </h1>
 <p align="center">
-  The first iteration of <a href="lacrimae.github.io" target="_blank">gazijarin.com</a> built with React.js leveraging Material UI.
+  The first iteration of <a href="https://lacrimae.github.io/" target="_blank">lacrimae.github.io</a> built with React.js leveraging Material UI.
 </p>
 
 ## 🛠 set-up
