@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
@@ -10,168 +10,155 @@ import FadeInSection from "./FadeInSection";
 const isHorizontal = window.innerWidth < 600;
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
-  if (isHorizontal) {
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  } else {
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
+    if (isHorizontal) {
+        return (
+            <div
+                role="tabpanel"
+                hidden={value !== index}
+                id={`full-width-tabpanel-${index}`}
+                aria-labelledby={`full-width-tab-${index}`}
+                {...other}
+            >
+                {value === index && (
+                    <Box p={3}>
+                        <Typography>{children}</Typography>
+                    </Box>
+                )}
+            </div>
+        );
+    } else {
+        return (
+            <div
+                role="tabpanel"
+                hidden={value !== index}
+                id={`vertical-tabpanel`}
+                {...other}
+            >
+                {value === index && (
+                    <Box p={3}>
+                        <Typography>{children}</Typography>
+                    </Box>
+                )}
+            </div>
+        );
+    }
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
-  if (isHorizontal) {
-    return {
-      id: `full-width-tab-${index}`,
-      "aria-controls": `full-width-tabpanel-${index}`
-    };
-  } else {
-    return {
-      id: `vertical-tab-${index}`
-    };
-  }
+    if (isHorizontal) {
+        return {
+            id: `full-width-tab-${index}`,
+            "aria-controls": `full-width-tabpanel-${index}`
+        };
+    } else {
+        return {
+            id: `vertical-tab-${index}`
+        };
+    }
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "theme.palette.background.paper",
-    display: "flex",
-    height: 300
-  },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`
-  }
+    root: {
+        flexGrow: 1,
+        backgroundColor: "theme.palette.background.paper",
+        display: "flex",
+        height: 300
+    },
+    tabs: {
+        borderRight: `1px solid ${theme.palette.divider}`
+    }
 }));
 
 const JobList = () => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
 
-  const experienceItems = {
-    Amazon: {
-      jobTitle: "Software Development Engineer @",
-      duration: "JUL 2022 - PRESENT",
-      desc: [
-        "Led development of end-to-end region build automation across Route 53 (AWS's DNS web service).  This enabled the launch of customer-facing global services in new regions within a day, a significant reduction from the previous time-frame of a month.",
-        "Re-built Route 53's core domain management and DNS systems to provide a better user experience to millions of customers."
-      ]
-    },
-    Wattpad: {
-      jobTitle: "Associate Engineer @",
-      duration: "MAY 2020 - APR 2021",
-      desc: [
-        "Developed a responsive React web page (the new Story Details) from scratch, both on client and server side, for an app with massive scale (2 billion daily requests).",
-        "Iteratively built web experiences for 80 million users across high-traffic pages.",
-        "Collaborated with senior engineers and product management following best practices for the full software development life cycle, including coding standards, code reviews, source control management, build processes, testing, and operations."
-      ]
-    },
-    "University of Toronto": {
-      jobTitle: "Research Engineer @",
-      duration: "MAY 2021 - SEPT 2021",
-      desc: [
-        "Developed and researched an NLP-based framework using state-of-the-art tools like Spacy and Stanza to facilitate the derivation of requirements from health data by leveraging syntactic dependencies, entity-recognition and rule-based match-making.",
-        " Application selected for DCS Research Award ($4,000) as part of the ”Visualizing Privacy Analysis Results” project led by Professor Marsha Chechik."
-      ]
-    },
-    Centivizer: {
-      jobTitle: "Software Developer @",
-      duration: "SEPT 2019 - APR 2020",
-      desc: [
-        "Developed interactive and neural-activation technologies to stimulate physical and cognitive functions in order to slow the progression of neurodegenerative disorders.",
-        "Leveraged WebRTC to develop and maintain a Node.js online video-streaming platform in real-time competitive-mode games to research the effects of active stimulation for those suffering from dementia."
-      ]
-    },
-    // TDSB: {
-    //   jobTitle: "Software Engineer @",
-    //   duration: "SEPT 2019 - DEC 2020",
-    //   desc: [
-    //     "Co-developed homework management software integrable with Google Classroom by utilizing the Python’s Flask micro-framework for the back-end API and Vue.js for the front-end UI, in order to translate business requirements into a functional full-stack application."
-    //   ]
-    // },
-    "Orange Gate": {
-      jobTitle: "Software Developer Intern @",
-      duration: "MAY 2019 - AUG 2019",
-      desc: [
-        "Developed a Node.js smart home system through Facebook’s Messenger integrated with Bocco sensors and other smart devices (Nest camera, TPLink smart plugs) to derive conclusions about the current state of the home",
-        "Identified continuous improvements in data quality, design reports and coding activities, presenting results and findings to internal business stakeholders.",
-        "Relevant technologies/tools used: DialogFlow, Vision, AutoML, Messenger Bot API, MongoDB."
-      ]
-    }
-  };
+    const experienceItems = {
+        "Wells Fargo": {
+            jobTitle: "Software Development Engineer @",
+            duration: "APR 2023 - PRESENT",
+            desc: [
+                "Architected and developed a scalable, high-availability web application proficient in managing over 10,000 concurrent applicants daily, ensuring uninterrupted service delivery across both in-branch and online channels with minimal downtime.",
+                "Fulfilled two roles, serving as both a software engineer and a quality assurance engineer, while simultaneously designing, implementing, authoring behavior-driven test case automation.",
+                "Performed regression testing and conducted in-depth analysis of Splunk production logs to identify and rectify various critical bugs."
+            ]
+        },
+        "Epam Systems": {
+            jobTitle: "Software Engineer @",
+            duration: "OCT 2021 - APR 2023",
+            desc: [
+                "As a fullstack software engineer, I've developed business logic, written unit and integration tests, and resolved bugs for both frontend and backend.",
+                "Managed maintenance for up to 20 internal Google applications, increasing test coverage, implementing feature requests, and troubleshooting bugs.",
+                "Participated in diverse projects using various technologies, including life-science and fin-tech.",
+                "Worked for a Google account as a vendor for six months, gaining valuable experience with Google's infrastructure, including Critique, Piper/Fig, Buganizer, Blaze, and Spanner."
+            ]
+        },
+        "Alfa Lab": {
+            jobTitle: "Biotech Engineer @",
+            duration: "FEB 2020 - APR 2020",
+            desc: [
+                "In my role as a Biotech Engineer, I managed the entire life cycle of PCR test creation, which included preparing raw materials, developing PCR tests, and maintaining meticulous laboratory records.",
+                "My responsibilities involved closely monitoring every aspect of the PCR test creation process to guarantee that results were of the highest quality and accuracy.",
+                "I also played a critical role in addressing and resolving any issues that arose during the development and testing stages, utilizing my problem-solving skills to enhance the efficiency and precision of PCR testing."
+            ]
+        },
+        "A.N.Nesmeyanov Institute of Organoelement Compounds": {
+            jobTitle: "Research Assistant @",
+            duration: "JAN 2018 - AUG 2019",
+            desc: [
+                "I was responsible for conducting chemical synthesis and further purifying compounds using chromatography columns, preparing and analyzing samples for NMR and MASS spectrometry.",
+                "Our team successfully secured an international grant aimed at funding the development of an organic compound with significant potential for cancer treatment."
+            ]
+        }
+    };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
-  return (
-    <div className={classes.root}>
-      <Tabs
-        orientation={!isHorizontal ? "vertical" : null}
-        variant={isHorizontal ? "fullWidth" : "scrollable"}
-        value={value}
-        onChange={handleChange}
-        className={classes.tabs}
-      >
-        {Object.keys(experienceItems).map((key, i) => (
-          <Tab label={isHorizontal ? `0${i}.` : key} {...a11yProps(i)} />
-        ))}
-      </Tabs>
-      {Object.keys(experienceItems).map((key, i) => (
-        <TabPanel value={value} index={i}>
+    return (
+        <div className={classes.root}>
+            <Tabs
+                orientation={!isHorizontal ? "vertical" : null}
+                variant={isHorizontal ? "fullWidth" : "scrollable"}
+                value={value}
+                onChange={handleChange}
+                className={classes.tabs}
+            >
+                {Object.keys(experienceItems).map((key, i) => (
+                    <Tab label={isHorizontal ? `0${i}.` : key} {...a11yProps(i)} />
+                ))}
+            </Tabs>
+            {Object.keys(experienceItems).map((key, i) => (
+                <TabPanel value={value} index={i}>
           <span className="joblist-job-title">
             {experienceItems[key]["jobTitle"] + " "}
           </span>
-          <span className="joblist-job-company">{key}</span>
-          <div className="joblist-duration">
-            {experienceItems[key]["duration"]}
-          </div>
-          <ul className="job-description">
-            {experienceItems[key]["desc"].map(function (descItem, i) {
-              return (
-                <FadeInSection delay={`${i + 1}00ms`}>
-                  <li key={i}>{descItem}</li>
-                </FadeInSection>
-              );
-            })}
-          </ul>
-        </TabPanel>
-      ))}
-    </div>
-  );
+                    <span className="joblist-job-company">{key}</span>
+                    <div className="joblist-duration">
+                        {experienceItems[key]["duration"]}
+                    </div>
+                    <ul className="job-description">
+                        {experienceItems[key]["desc"].map(function (descItem, i) {
+                            return (
+                                <FadeInSection delay={`${i + 1}00ms`}>
+                                    <li key={i}>{descItem}</li>
+                                </FadeInSection>
+                            );
+                        })}
+                    </ul>
+                </TabPanel>
+            ))}
+        </div>
+    );
 };
 
 export default JobList;
